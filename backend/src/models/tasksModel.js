@@ -1,9 +1,10 @@
 const connection = require('./connection');
 const { ObjectId } = require('mongodb');
 
-const getAll = async () => {
+const getAll = async (userId) => {
+  const query = { userId: ObjectId(userId) };
   const db = await connection();
-  const tasks = await db.collection('tasks').find().toArray();
+  const tasks = await db.collection('tasks').find(query).toArray();
   return tasks;
 };
 
@@ -15,11 +16,12 @@ const getById = async (id) => {
   return tasks;
 };
 
-const create = async ({ task, status, createdAt }) => {
+const create = async ({ task, status, createdAt, userId }) => {
   const query = {
     task,
     status,
     createdAt,
+    userId,
   };
 
   const db = await connection();
