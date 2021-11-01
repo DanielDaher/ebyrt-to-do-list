@@ -15,7 +15,20 @@ const getById = async (id) => {
   return tasks;
 };
 
+const create = async ({ task, status, createdAt }) => {
+  const query = {
+    task,
+    status,
+    createdAt,
+  };
+
+  const db = await connection();
+  await db.collection('tasks').insertOne(query);
+  return 'task inserted successfully';
+};
+
 module.exports = {
   getAll,
   getById,
+  create,
 };
