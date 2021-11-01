@@ -49,9 +49,22 @@ const updateTaskById = async (req, res) => {
   }
 };
 
+const removeTaskById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const removeTask = await tasksService.removeTaskById(id);
+
+    res.status(removeTask.statusCode).json(removeTask.responseMessage);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: 'error, try again latter' });
+  }
+};
+
 module.exports = {
   getAll,
   getById,
   create,
   updateTaskById,
+  removeTaskById,
 };
