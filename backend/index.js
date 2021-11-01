@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-const tasksRoute = require('./Routes/tasksRoute');
+const tasksRoute = require('./src/Routes/tasksRoute');
 
 app.use(express.json());
 
