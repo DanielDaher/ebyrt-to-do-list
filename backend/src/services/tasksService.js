@@ -26,8 +26,22 @@ const create = async ({ task, status }) => {
   return { responseMessage: insert, statusCode: 201 };
 };
 
+const updateTaskById = async ({ task, status, id }) => {
+  const responseMessage = `Invalid info. The fields 'task' and 'status' are required on this body requisition`;
+  const validReqBody = validateReqBody({ task, status });
+  const findTask = await tasksModel.getById(id);
+
+  if (!findTask) return { statusCode: 404, responseMessage: 'task not found!' };
+  if (!validReqBody) return { statusCode: 400, responseMessage };
+
+  const updateInfos = await tasksModel.updateTaskById({ task, status, id });
+
+  return { responseMessage: updateInfos.value, statusCode: 200 };
+};
+
 module.exports = {
   getAll,
   getById,
   create,
+  updateTaskById,
 };

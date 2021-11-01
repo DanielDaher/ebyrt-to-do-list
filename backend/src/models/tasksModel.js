@@ -27,8 +27,18 @@ const create = async ({ task, status, createdAt }) => {
   return 'task inserted successfully';
 };
 
+const updateTaskById = async ({ task, status, id }) => {
+  const findTask = { _id: ObjectId(id) };
+  const query = { $set: { task, status } };
+
+  const db = await connection();
+  const updateInfos = db.collection('tasks').findOneAndUpdate(findTask, query, { returnNewDocument: true });
+  return updateInfos;
+};
+
 module.exports = {
   getAll,
   getById,
   create,
+  updateTaskById,
 };

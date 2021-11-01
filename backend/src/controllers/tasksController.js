@@ -36,10 +36,22 @@ const create = async (req, res) => {
   }
 };
 
+const updateTaskById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { task, status } = req.body;
+    const updateInfos = await tasksService.updateTaskById({ task, status, id });
 
+    res.status(updateInfos.statusCode).json(updateInfos.responseMessage);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: 'error, try again latter' });
+  }
+};
 
 module.exports = {
   getAll,
   getById,
   create,
+  updateTaskById,
 };
