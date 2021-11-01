@@ -39,9 +39,22 @@ const updateTaskById = async ({ task, status, id }) => {
   return { responseMessage: updateInfos.value, statusCode: 200 };
 };
 
+const removeTaskById = async (id) => {
+  const responseMessage = `invalid id, task not found!`;
+  const statusCode = 404;
+  const findTask = await tasksModel.getById(id);
+
+  if (!findTask) return { statusCode, responseMessage };
+
+  const removeTask = await tasksModel.removeTaskById(id);
+
+  return { responseMessage: removeTask, statusCode: 200 };
+};
+
 module.exports = {
   getAll,
   getById,
   create,
   updateTaskById,
+  removeTaskById,
 };
