@@ -8,7 +8,7 @@ const getAll = async (req, res) => {
 
   } catch (error) {
     console.error(error);
-    res.status(404).json({ message: 'error, try again latter' });
+    res.status(400).json({ message: 'error, try again latter' });
   }
 };
 
@@ -18,14 +18,28 @@ const getById = async (req, res) => {
     const task = await tasksService.getById(id);
 
     res.status(task.statusCode).json(task.responseMessage);
-
   } catch (error) {
     console.error(error);
-    res.status(404).json({ message: 'error, try again latter' });
+    res.status(400).json({ message: 'error, try again latter' });
   }
 };
+
+const create = async (req, res) => {
+  try {
+    const { task, status } = req.body;
+    const insert = await tasksService.create({ task, status });
+  
+    res.status(insert.statusCode).json(insert.responseMessage);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: 'error, try again latter' });
+  }
+};
+
+
 
 module.exports = {
   getAll,
   getById,
+  create,
 };
