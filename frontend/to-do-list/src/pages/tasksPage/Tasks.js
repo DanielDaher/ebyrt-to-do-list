@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import loginContext from '../../context/LoginContext';
 import '../../css/Tasks.css';
 
-export default function Tasks() {
+export default function Tasks(props) {
+  const { token, setToken } = useContext(loginContext);
   return (
     <div>
-      <h3>Tasks</h3>
+      <h1>Tasks</h1>
       <div className="boards-content">
         <div className="first-board">
           <h3>Pending</h3>

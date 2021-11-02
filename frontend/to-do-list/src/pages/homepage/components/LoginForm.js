@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../../css/LoginForm.css';
 
-export default function LoginForm() {
+export default function LoginForm(props) {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [showError, setShowError] = useState(false);
+
+  const saveTokenAndLocalStorage = (token) => {
+    localStorage.setItem("toDoListToken", token);
+  };
 
   const renderizeSubmitButton = () => {
     return (
@@ -38,7 +42,6 @@ export default function LoginForm() {
 
   const makeLogin = async (e) => {
     e.preventDefault();
-
     const url = 'http://localhost:3000/login';
 
     const requisition = await fetch(url, {
@@ -50,11 +53,9 @@ export default function LoginForm() {
     });
 
     const APIresponse = await requisition.json();
-    console.log(APIresponse);
-
     if (APIresponse.message) return setShowError(APIresponse.message);
 
-    localStorage.setItem("toDoListToken", APIresponse.token);
+    saveTokenAndLocalStorage(APIresponse.token);
     redirectToTasks();
   };
 
