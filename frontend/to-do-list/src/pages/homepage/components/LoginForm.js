@@ -5,10 +5,42 @@ import '../../../css/LoginForm.css';
 export default function LoginForm() {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
+  const [showError, setShowError] = useState(false);
+
+  const renderizeSubmitButton = () => {
+    return (
+      <button
+        type="submit"
+        onSubmit={(e) => makeLogin(e)} >
+        Login
+      </button>
+    );
+  };
+
+  const showLoginError = () => {
+    return (
+      <div>
+        <p className="login-error-message">{showError}</p>
+        <button type="button"
+        onClick={() => setShowError(false)}
+        >
+          OK
+        </button>
+      </div>
+    );
+  };
+
+  const redirectToTasks = () => {
+    setUser('');
+    setPassword('');
+    window.location.href = `${window.origin}/tasks`;
+  };
 
   const makeLogin = async (e) => {
     e.preventDefault();
+
     const url = 'http://localhost:3000/login';
+
     const requisition = await fetch(url, {
       method: "POST",
       body: JSON.stringify({
@@ -16,8 +48,14 @@ export default function LoginForm() {
         password,
       }),
     });
-    const json = await requisition.json();
-    console.log(json);
+
+    const APIresponse = await requisition.json();
+    console.log(APIresponse);
+
+    if (APIresponse.message) return setShowError(APIresponse.message);
+
+    localStorage.setItem("toDoListToken", APIresponse.token);
+    redirectToTasks();
   };
 
   return (
@@ -30,11 +68,7 @@ export default function LoginForm() {
         Password
         <input type="text" onChange={(e) => setPassword(e.target.value)} />
       </label>
-      <button
-        type="submit"
-        onSubmit={(e) => makeLogin(e)} >
-        Login
-      </button>
+      {showError ? showLoginError() : renderizeSubmitButton()}
       <Link to="/characters" className="login-form-link">
         <p>Not registered yet? Click here!</p>
       </Link>

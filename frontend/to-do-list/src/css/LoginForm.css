@@ -3,9 +3,9 @@ form {
   flex-direction: column;
   max-width: 350px;
   background-color: rgba(84, 84, 84, 0.7);
-};
+}
 
 .login-form-link {
   text-decoration: none;
   color: white;
-};
+}

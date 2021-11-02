@@ -1,0 +1,12 @@
+.boards-content {
+  display: flex;
+  justify-content: center;
+  height: 500px;
+  width: 100vw;
+}
+
+.first-board, .second-board, .third-board {
+  background-color: rgba(84, 84, 84, 0.8);
+  margin: 50px;
+  width: 700px;
+}
