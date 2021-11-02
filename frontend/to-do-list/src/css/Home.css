@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Lexend+Mega:wght@100;152&display=swap');
+.home-content {
+  display: flex;
+}
 
 .home-title{
   font-family: 'Anton';
