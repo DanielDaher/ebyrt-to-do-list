@@ -6,9 +6,18 @@ export default function LoginForm() {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
 
-  const makeLogin = (e) => {
+  const makeLogin = async (e) => {
     e.preventDefault();
-    console.log(user, password);
+    const url = 'http://localhost:3000/login';
+    const requisition = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        userName: user,
+        password,
+      }),
+    });
+    const json = await requisition.json();
+    console.log(json);
   };
 
   return (
