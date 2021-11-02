@@ -8,7 +8,10 @@ const loginRoute = require('./src/Routes/loginRoute');
 const usersRoute = require('./src/Routes/usersRoute');
 
 
-app.use(express.json());
+app.use(express.json({
+  type: ['application/json', 'text/plain']
+})); //https://stackoverflow.com/questions/54016068/empty-body-in-fetch-post-request 
+
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');

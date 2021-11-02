@@ -1,7 +1,6 @@
 const tasksService = require('../services/tasksService');
 
 const getAll = async (req, res) => {
-  console.log(req.user);
   try {
     const { _id: userId } = req.user;
     const tasks = await tasksService.getAll(userId);
@@ -30,7 +29,6 @@ const getById = async (req, res) => {
 const create = async (req, res) => {
   try {
     const { _id: userId } = req.user;
-    console.log(userId);
     const { task, status } = req.body;
     const insert = await tasksService.create({ task, status, userId });
   
