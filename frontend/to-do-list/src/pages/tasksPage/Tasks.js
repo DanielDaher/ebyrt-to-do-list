@@ -4,7 +4,7 @@ import loginContext from '../../context/LoginContext';
 import '../../css/Tasks.css'; 
 
 export default function Tasks(props) {
-  const { token, separateTasksByStatus } = useContext(loginContext);
+  const { token, separateTasksByStatus, renderButtonsOptions, renderSelectAndOptions } = useContext(loginContext);
   const [updateTask, setUpdateTask] = useState(false);
   const [tasks, setTasks] = useState(null);
   const tokenRef = useRef(token);
@@ -35,19 +35,8 @@ export default function Tasks(props) {
     getAllTasks();
   }, []);
 
-  const renderButtonsOptions = () => {
-    return (
-      <div>
-        <button type="button">X</button>
-        <button type="button">Edit</button>
-        <button type="button">Pending</button>
-        <button type="button">In progress</button>
-        <button type="button">Concluded</button>
-      </div>
-    );
-  };
-
-  const renderTask = ({ task, _id }) => {
+  const renderTask = (allInfosTask) => {
+    const { task, _id } = allInfosTask;
     if (updateTask) return (
       <div key={_id}>
         <input type="text" value={task}/>
@@ -58,7 +47,8 @@ export default function Tasks(props) {
         <p>
           {task}
         </p>
-        {renderButtonsOptions()}
+        {renderButtonsOptions(allInfosTask)}
+        {renderSelectAndOptions(allInfosTask, getAllTasks)}
       </div>
     );
   };
