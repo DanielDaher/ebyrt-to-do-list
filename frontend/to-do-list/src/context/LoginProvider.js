@@ -1,20 +1,37 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react/cjs/react.development';
 import LoginContext from './LoginContext';
 
 export default function LoginProvider(props) {
-  const [token, setToken] = useState('');
+  const token = localStorage.getItem("toDoListToken") || null;
+  
+  const separateTasksByStatus = (tasks) => {
+    const pending = 'pendente';
+    const inProgress = 'em progresso';
 
-  useEffect(() => {
-    const newToken = localStorage.getItem('toDoListToken');
-    setToken(newToken);
-  }, []);
-
+    const dividedTasks = {
+      pending: [],
+      inProgress: [],
+      concluded: [],
+    };
+    tasks.forEach((task) => {
+      switch (task.status) {
+        case pending:
+          dividedTasks.pending.push(task);
+          break;
+        case inProgress:
+          dividedTasks.inProgress.push(task);
+          break;
+        default:
+          dividedTasks.concluded.push(task);
+          break;
+      }
+    })
+    return dividedTasks;
+  };
 
   const { children } = props;
   const contextValue = {
     token,
-    setToken,
+    separateTasksByStatus,
   };
 
   return (
