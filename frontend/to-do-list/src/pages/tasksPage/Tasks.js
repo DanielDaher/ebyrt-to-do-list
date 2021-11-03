@@ -1,57 +1,39 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { useState } from 'react/cjs/react.development';
 import loginContext from '../../context/LoginContext';
 import '../../css/Tasks.css'; 
+import Filters from './components/Filters';
 import FormAddTask from './components/FormAddTask';
 import RenderTask from './components/RenderTask';
 
 export default function Tasks(props) {
-  const { token, separateTasksByStatus } = useContext(loginContext);
-  const [tasks, setTasks] = useState({});
-  const tokenRef = useRef(token);
-  const separateTasks = useRef(separateTasksByStatus);
+  const { tasks, setTasks, getAllTasks } = useContext(loginContext);
+  const fetchTasks = useRef(getAllTasks);
 
-  const getAllTasks = async () => {
-    try {
-      const url = 'http://localhost:3000/tasks';
-    
-      const requisition = await fetch(url, {
-        method: "GET",
-        headers: new Headers({
-          'Authorization': tokenRef.current,
-          'Content-Type': 'application/json',
-        }),
-      });
-      const APIresponse = await requisition.json();
-  
-      const allTasks = separateTasks.current(APIresponse);
-      
-      setTasks(allTasks);
-    } catch (error) {
-      console.error(error);
-    }
+  const getTasksFromAPI = async () => {
+    await fetchTasks.current();
   };
 
   useEffect(() => {
-    getAllTasks();
+    getTasksFromAPI();
   }, []);
 
   return (
     <div className="tasks-content">
       <h1>Tasks</h1>
       <FormAddTask getTasks={getAllTasks} />
+      <Filters tasks={tasks} setTasks={setTasks} />
       <div className="boards-content">
         <div className="first-board">
           <h3>Pending</h3>
-          {!tasks.pending ? null : tasks.pending.map(task => <RenderTask allInfosTask={task} getTasks={getAllTasks} key={task._id} />)}
+          <RenderTask taskStatus='Pending'/>
         </div>
         <div className="second-board">
           <h3>In progress</h3>
-          {!tasks.inProgress ? null : tasks.inProgress.map(task => <RenderTask allInfosTask={task} getTasks={getAllTasks} key={task._id} />)}
+          <RenderTask taskStatus='In Progress'/>
         </div>
         <div className="third-board">
           <h3>Concluded</h3>
-          {!tasks.concluded ? null : tasks.concluded.map(task => <RenderTask allInfosTask={task} getTasks={getAllTasks} key={task._id} />)}
+          <RenderTask taskStatus='Concluded'/>
         </div>
       </div>
     </div>

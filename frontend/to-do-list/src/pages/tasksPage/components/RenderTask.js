@@ -2,17 +2,16 @@ import React, { useContext, useState } from 'react';
 import loginContext from '../../../context/LoginContext';
 
 export default function RenderTask(props) {
-  const { allInfosTask, getTasks } = props;
-  const [newTask, setNewTask] = useState(allInfosTask.task);
-  const { renderButtonsOptions, renderSelectAndOptions, editTask, setEditTask, updateTaskById } = useContext(loginContext);
+  const { taskStatus } = props;
+  const { tasks, getAllTasks, renderButtonsOptions, renderSelectAndOptions, editTask, setEditTask, updateTaskById } = useContext(loginContext);
 
-  const { status, _id, task } = allInfosTask;
+ const filteredTasksByStatus = tasks.filter((task) => task.status === taskStatus);
 
-  const saveNewTaskOnState = (value) => {
+ /*  const saveNewTaskOnState = (value) => {
     setNewTask(value);
   };
 
-  const sendNewTaskToUpdate = async (status, getTasks, allInfosTask) => {
+  const sendNewTaskToUpdate = async (status, allInfosTask) => {
     await updateTaskById(status, getTasks, { ...allInfosTask, task: newTask });
     setEditTask(false);
   };
@@ -32,15 +31,17 @@ export default function RenderTask(props) {
           OK
       </button>
     </div>
-  );
+  ); */
 
   return (
-    <div key={_id}>
-    <p>
-      {task}
-    </p>
-    {renderButtonsOptions(allInfosTask, getTasks)}
-    {renderSelectAndOptions(allInfosTask, getTasks)}
-  </div>
+    filteredTasksByStatus.map((task) => (
+      <div key={task._id}>
+      <p>
+        {task.task}
+      </p>
+      {renderButtonsOptions(task)}
+      {renderSelectAndOptions(task)}
+    </div>
+    ))
   );
 };

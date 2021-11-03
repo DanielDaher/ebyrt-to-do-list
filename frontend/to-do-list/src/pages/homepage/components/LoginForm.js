@@ -60,7 +60,7 @@ export default function LoginForm(props) {
   };
 
   return (
-    <form onSubmit={(e) => makeLogin(e)}>
+    <form className="login-form" onSubmit={(e) => makeLogin(e)}>
       <label>
         User
         <input type="text" onChange={(e) => setUser(e.target.value)} />

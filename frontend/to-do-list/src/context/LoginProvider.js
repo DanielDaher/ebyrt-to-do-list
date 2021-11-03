@@ -4,34 +4,29 @@ import LoginContext from './LoginContext';
 export default function LoginProvider(props) {
   const token = localStorage.getItem("toDoListToken") || null;
   const [editTask, setEditTask] = useState(false);
-  
-  const separateTasksByStatus = (tasks) => {
-    const pending = 'Pending';
-    const inProgress = 'In Progress';
+  const [reverse, setReverse] = useState(false);
+  const [tasks, setTasks] = useState([]);
 
-    const dividedTasks = {
-      pending: [],
-      inProgress: [],
-      concluded: [],
-    };
-    if (tasks === 'this user has no tasks yet!') return dividedTasks;
-    tasks.forEach((task) => {
-      switch (task.status) {
-        case pending:
-          dividedTasks.pending.push(task);
-          break;
-        case inProgress:
-          dividedTasks.inProgress.push(task);
-          break;
-        default:
-          dividedTasks.concluded.push(task);
-          break;
-      }
-    })
-    return dividedTasks;
+  const getAllTasks = async () => {
+    console.log('getAllTasks');   
+    try {
+      const url = 'http://localhost:3000/tasks';
+    
+      const requisition = await fetch(url, {
+        method: "GET",
+        headers: new Headers({
+          'Authorization': token,
+          'Content-Type': 'application/json',
+        }),
+      });
+      const APIresponse = await requisition.json();     
+      setTasks(APIresponse);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const updateTaskById = async (status, getAllTasks, { task, _id }) => {
+  const updateTaskById = async (status, { task, _id }) => {
     if (status === 'Change status') return null;
     try {
       const url = `http://localhost:3000/tasks/${_id}`;
@@ -76,7 +71,7 @@ export default function LoginProvider(props) {
     }
   };
 
-  const removeTaskById = async ({ _id }, getTasks) => {
+  const removeTaskById = async ({ _id }) => {
     try {
       const url = `http://localhost:3000/tasks/${_id}`;
     
@@ -88,24 +83,24 @@ export default function LoginProvider(props) {
           'Authorization': token
         },
       });
-      await getTasks();
+      await getAllTasks();
     } catch (error) {
       console.error(error);
     }
   };
 
-  const renderButtonsOptions = (task, getTasks) => {
+  const renderButtonsOptions = (task) => {
     return (
       <div>
-        <button type="button" onClick={() => removeTaskById(task, getTasks)}>X</button>
+        <button type="button" onClick={() => removeTaskById(task)}>X</button>
         <button type="button" onClick={() => setEditTask(true)}>Edit</button>
       </div>
     );
   };
 
-  const renderSelectAndOptions = (task, getAllTasks) => {
+  const renderSelectAndOptions = (task) => {
     return (
-      <select onChange={(e) => updateTaskById(e.target.value, getAllTasks, task)}>
+      <select onChange={(e) => updateTaskById(e.target.value, task)}>
         <option>Change status</option>
         <option value="Pending">Pending</option>
         <option value="In Progress">In Progress</option>
@@ -117,13 +112,17 @@ export default function LoginProvider(props) {
   const { children } = props;
   const contextValue = {
     token,
-    separateTasksByStatus,
     renderButtonsOptions,
     renderSelectAndOptions,
     editTask,
     setEditTask,
     updateTaskById,
     addTask,
+    tasks,
+    setTasks,
+    getAllTasks,
+    reverse,
+    setReverse,
   };
 
   return (
