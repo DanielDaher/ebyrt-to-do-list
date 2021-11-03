@@ -41,18 +41,15 @@ export default function Tasks(props) {
       <div className="boards-content">
         <div className="first-board">
           <h3>Pending</h3>
-          {!tasks ? null : tasks.pending.map(task => <RenderTask allInfosTask={task} getTasks={getAllTasks} />)}
-          <button>+</button>
+          {!tasks ? null : tasks.pending.map(task => <RenderTask allInfosTask={task} getTasks={getAllTasks} key={task._id} />)}
         </div>
         <div className="second-board">
           <h3>In progress</h3>
-          {!tasks ? null : tasks.inProgress.map(task => <RenderTask allInfosTask={task} getTasks={getAllTasks} />)}
-          <button>+</button>
+          {!tasks ? null : tasks.inProgress.map(task => <RenderTask allInfosTask={task} getTasks={getAllTasks} key={task._id} />)}
         </div>
         <div className="third-board">
           <h3>Concluded</h3>
-          {!tasks ? null : tasks.concluded.map(task => <RenderTask allInfosTask={task} getTasks={getAllTasks} />)}
-          <button>+</button>
+          {!tasks ? null : tasks.concluded.map(task => <RenderTask allInfosTask={task} getTasks={getAllTasks} key={task._id} />)}
         </div>
       </div>
     </div>

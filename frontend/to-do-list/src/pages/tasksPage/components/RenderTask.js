@@ -13,33 +13,29 @@ export default function RenderTask(props) {
   };
 
   const sendNewTaskToUpdate = async (status, getTasks, allInfosTask) => {
-    await updateTaskById(status, getTasks, allInfosTask);
+    await updateTaskById(status, getTasks, { ...allInfosTask, task: newTask });
     setEditTask(false);
   };
 
   if (editTask) return (
-    <div>
-      <div key={_id}>
-        <input
-          type="text"
-          placeholder="insert the new task"
-          value={newTask}
-          onChange={(e) => saveNewTaskOnState(e.target.value)}
-        />
-        <button type="button" onClick={() => sendNewTaskToUpdate(status, getTasks, allInfosTask)}>OK</button>
-      </div>
+    <div key={_id}>
+      <input
+        type="text"
+        placeholder="insert the new task"
+        value={newTask}
+        onChange={(e) => saveNewTaskOnState(e.target.value)}
+      />
+      <button type="button" onClick={() => sendNewTaskToUpdate(status, getTasks, allInfosTask)}>OK</button>
     </div>
   );
 
   return (
-    <div>
-      <div key={_id}>
-      <p>
-        {task}
-      </p>
-      {renderButtonsOptions(allInfosTask)}
-      {renderSelectAndOptions(allInfosTask, getTasks)}
-    </div>
-    </div>
+    <div key={_id}>
+    <p>
+      {task}
+    </p>
+    {renderButtonsOptions(allInfosTask, getTasks)}
+    {renderSelectAndOptions(allInfosTask, getTasks)}
+  </div>
   );
 };

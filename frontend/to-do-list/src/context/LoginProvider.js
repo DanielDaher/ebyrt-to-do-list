@@ -53,11 +53,29 @@ export default function LoginProvider(props) {
     }
   };
 
-  const renderButtonsOptions = (task) => {
+  const removeTaskById = async ({ _id }, getTasks) => {
+    try {
+      const url = `http://localhost:3000/tasks/${_id}`;
+    
+      await fetch(url, {
+        method: "DELETE",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': token
+        },
+      });
+      await getTasks();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const renderButtonsOptions = (task, getTasks) => {
     return (
       <div>
-        <button type="button">X</button>
-        <button type="button">Edit</button>
+        <button type="button" onClick={() => removeTaskById(task, getTasks)}>X</button>
+        <button type="button" onClick={() => setEditTask(true)}>Edit</button>
       </div>
     );
   };
