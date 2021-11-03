@@ -14,6 +14,7 @@ export default function LoginProvider(props) {
       inProgress: [],
       concluded: [],
     };
+    if (tasks === 'this user has no tasks yet!') return dividedTasks;
     tasks.forEach((task) => {
       switch (task.status) {
         case pending:
@@ -48,6 +49,28 @@ export default function LoginProvider(props) {
         }),
       });
       await getAllTasks();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const addTask = async ({ task, status }, getTasks) => {
+    try {
+      const url = 'http://localhost:3000/tasks/';
+    
+      await fetch(url, {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': token
+        },
+        body: JSON.stringify({
+          task,
+          status,
+        }),
+      });
+      await getTasks();
     } catch (error) {
       console.error(error);
     }
@@ -100,6 +123,7 @@ export default function LoginProvider(props) {
     editTask,
     setEditTask,
     updateTaskById,
+    addTask,
   };
 
   return (

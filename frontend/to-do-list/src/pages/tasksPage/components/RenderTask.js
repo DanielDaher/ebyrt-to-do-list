@@ -25,7 +25,12 @@ export default function RenderTask(props) {
         value={newTask}
         onChange={(e) => saveNewTaskOnState(e.target.value)}
       />
-      <button type="button" onClick={() => sendNewTaskToUpdate(status, getTasks, allInfosTask)}>OK</button>
+      <button
+        type="button"
+        onClick={() => sendNewTaskToUpdate(status, getTasks, allInfosTask)}
+        >
+          OK
+      </button>
     </div>
   );
 
