@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import LoginContext from './LoginContext';
 
 export default function LoginProvider(props) {
   const token = localStorage.getItem("toDoListToken") || null;
+  const [editTask, setEditTask] = useState(false);
   
   const separateTasksByStatus = (tasks) => {
     const pending = 'Pending';
@@ -77,6 +79,9 @@ export default function LoginProvider(props) {
     separateTasksByStatus,
     renderButtonsOptions,
     renderSelectAndOptions,
+    editTask,
+    setEditTask,
+    updateTaskById,
   };
 
   return (
