@@ -5,6 +5,7 @@ export default function LoginProvider(props) {
   const token = localStorage.getItem("toDoListToken") || null;
   const [editTask, setEditTask] = useState(false);
   const [alphabeticalTasks, setAlphabeticalTasks] = useState(false);
+  const [tasksByDate, setTasksByDate] = useState(false);
   const [tasks, setTasks] = useState([]);
 
   const getAllTasks = async () => {
@@ -20,20 +21,6 @@ export default function LoginProvider(props) {
         }),
       });
       const APIresponse = await requisition.json();
-      if (alphabeticalTasks) {
-        console.log('if');
-        const sorted = APIresponse.sort((a, b) => {
-          if (a.task < b.task) {
-            return -1
-          }
-          if (a.task > b.task) {
-            return 1;
-          }
-          return 0;
-        });
-        console.log(sorted, 'sorted');
-        setTasks(sorted);
-      }     
       setTasks(APIresponse);
     } catch (error) {
       console.error(error);
@@ -123,6 +110,26 @@ export default function LoginProvider(props) {
     );
   };
 
+  const sortTasksByName = (tasks) => tasks.sort((a, b) => {
+    if (a.task < b.task) {
+      return -1
+    }
+    if (a.task > b.task) {
+      return 1;
+    }
+    return 0;
+  });
+
+  const sortTasksByDate = (tasks) => tasks.sort((a, b) => {
+    if (a.createdAt < b.createdAt) {
+      return -1
+    }
+    if (a.createdAt > b.createdAt) {
+      return 1;
+    }
+    return 0;
+  });
+
   const { children } = props;
   const contextValue = {
     token,
@@ -137,6 +144,10 @@ export default function LoginProvider(props) {
     getAllTasks,
     alphabeticalTasks,
     setAlphabeticalTasks,
+    sortTasksByName,
+    tasksByDate,
+    setTasksByDate,
+    sortTasksByDate,
   };
 
   return (

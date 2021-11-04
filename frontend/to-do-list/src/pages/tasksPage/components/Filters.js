@@ -3,25 +3,27 @@ import '../../../css/FormAddTask.css';
 import loginContext from '../../../context/LoginContext';
 
 export default function Filters(props) {
-  const { alphabeticalTasks, setAlphabeticalTasks, getAllTasks } = useContext(loginContext);
-
-
-  console.log(alphabeticalTasks, 'alphabeticalTasks');
+  const { alphabeticalTasks, setAlphabeticalTasks, tasksByDate, setTasksByDate } = useContext(loginContext);
 
   const orderTasks = (value) => {
     switch (value) {
       case 'Alphabetical order':
         orderTasksByName();
         break;
+      case 'Creation date':
+        orderTasksByDate();
+        break;
       default:
         break;
     }
   };
 
+  const orderTasksByDate = async () => {
+    setTasksByDate(!tasksByDate);
+  };
+
   const orderTasksByName = async () => {
     setAlphabeticalTasks(!alphabeticalTasks);
-    await getAllTasks();
-    console.log(alphabeticalTasks, 'alphabeticalTasks');
   };
 
   return (

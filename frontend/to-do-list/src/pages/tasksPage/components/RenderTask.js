@@ -4,10 +4,18 @@ import loginContext from '../../../context/LoginContext';
 export default function RenderTask(props) {
   const { taskStatus } = props;
   const [newTask, setNewTask] = useState('');
-  const { tasks, renderButtonsOptions, renderSelectAndOptions, editTask, setEditTask, updateTaskById } = useContext(loginContext);
+  const { tasks, alphabeticalTasks, sortTasksByName, tasksByDate, sortTasksByDate, renderButtonsOptions, renderSelectAndOptions, editTask, setEditTask, updateTaskById } = useContext(loginContext);
 
   
-  const filteredTasksByStatus = tasks.filter((task) => task.status === taskStatus);
+  let filteredTasksByStatus = tasks.filter((task) => task.status === taskStatus);
+
+  if (alphabeticalTasks) {
+    filteredTasksByStatus = sortTasksByName(filteredTasksByStatus);
+  };
+
+  if (tasksByDate) {
+    filteredTasksByStatus = sortTasksByDate(filteredTasksByStatus);
+  }
   
   const saveNewTaskOnState = (value) => {
     setNewTask(value);
