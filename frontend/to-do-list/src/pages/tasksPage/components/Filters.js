@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import '../../../css/FormAddTask.css'; 
 import loginContext from '../../../context/LoginContext';
 
-export default function Filters(props) {
-  const { alphabeticalTasks, setAlphabeticalTasks, tasksByDate, setTasksByDate } = useContext(loginContext);
+export default function Filters() {
+  const { setAlphabeticalTasks, setTasksByDate } = useContext(loginContext);
 
   const orderTasks = (value) => {
     switch (value) {
@@ -19,11 +19,13 @@ export default function Filters(props) {
   };
 
   const orderTasksByDate = async () => {
-    setTasksByDate(!tasksByDate);
+    setAlphabeticalTasks(false);
+    setTasksByDate(true);
   };
 
   const orderTasksByName = async () => {
-    setAlphabeticalTasks(!alphabeticalTasks);
+    setTasksByDate(false);
+    setAlphabeticalTasks(true);
   };
 
   return (

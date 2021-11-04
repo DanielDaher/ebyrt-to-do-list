@@ -6,7 +6,7 @@ import FormAddTask from './components/FormAddTask';
 import RenderTask from './components/RenderTask';
 
 export default function Tasks(props) {
-  const { tasks, setTasks, getAllTasks } = useContext(loginContext);
+  const { getAllTasks } = useContext(loginContext);
   const fetchTasks = useRef(getAllTasks);
 
   const getTasksFromAPI = async () => {
@@ -22,7 +22,7 @@ export default function Tasks(props) {
     <div className="tasks-content">
       <h1>Tasks</h1>
       <FormAddTask getTasks={getAllTasks} />
-      <Filters tasks={tasks} setTasks={setTasks} />
+      <Filters/>
       <div className="boards-content">
         <div className="first-board">
           <h3>Pending</h3>

@@ -6,15 +6,17 @@ export default function RenderTask(props) {
   const [newTask, setNewTask] = useState('');
   const { tasks, alphabeticalTasks, sortTasksByName, tasksByDate, sortTasksByDate, renderButtonsOptions, renderSelectAndOptions, editTask, setEditTask, updateTaskById } = useContext(loginContext);
 
-  
+  console.log(tasks);
   let filteredTasksByStatus = tasks.filter((task) => task.status === taskStatus);
 
   if (alphabeticalTasks) {
     filteredTasksByStatus = sortTasksByName(filteredTasksByStatus);
+    console.log(filteredTasksByStatus);
   };
 
   if (tasksByDate) {
     filteredTasksByStatus = sortTasksByDate(filteredTasksByStatus);
+    console.log(filteredTasksByStatus);
   }
   
   const saveNewTaskOnState = (value) => {
