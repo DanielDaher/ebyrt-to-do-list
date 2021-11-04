@@ -3,34 +3,34 @@ import '../../../css/FormAddTask.css';
 import loginContext from '../../../context/LoginContext';
 
 export default function Filters(props) {
-  const { reverse, setReverse, alphabeticalTasks, setAlphabeticalTasks, getAllTasks } = useContext(loginContext);
+  const { alphabeticalTasks, setAlphabeticalTasks, getAllTasks } = useContext(loginContext);
 
-  const reverseTasks = () => {
-    setReverse(true);
-    console.log(reverse);
+
+  console.log(alphabeticalTasks, 'alphabeticalTasks');
+
+  const orderTasks = (value) => {
+    switch (value) {
+      case 'Alphabetical order':
+        orderTasksByName();
+        break;
+      default:
+        break;
+    }
   };
 
   const orderTasksByName = async () => {
-    if (!alphabeticalTasks) {
-      setAlphabeticalTasks(true);
-    }
-    if (alphabeticalTasks) {
-      setAlphabeticalTasks(false);
-    }
+    setAlphabeticalTasks(!alphabeticalTasks);
     await getAllTasks();
-    console.log(alphabeticalTasks);
+    console.log(alphabeticalTasks, 'alphabeticalTasks');
   };
 
-  return(
+  return (
     <form>
-      <label>
-        alphabetical order
-        <input type="checkbox" value="alphabetical order" onClick={() => orderTasksByName()} />
-      </label>
-      <label>
-        creation date
-        <input type="checkbox" value="creation date" onChange={() => reverseTasks()}/>
-      </label>
+      <select onChange={(e) => orderTasks(e.target.value)}>
+        <option>Order by</option>
+        <option>Alphabetical order</option>
+        <option>Creation date</option>
+      </select>
     </form>
   );
 };

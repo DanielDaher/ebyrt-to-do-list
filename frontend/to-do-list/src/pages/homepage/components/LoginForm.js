@@ -70,7 +70,7 @@ export default function LoginForm(props) {
         <input type="password" onChange={(e) => setPassword(e.target.value)} />
       </label>
       {showError ? showLoginError() : renderizeSubmitButton()}
-      <Link to="/characters" className="login-form-link">
+      <Link to="/register" className="login-form-link">
         <p>Not registered yet? Click here!</p>
       </Link>
     </form>

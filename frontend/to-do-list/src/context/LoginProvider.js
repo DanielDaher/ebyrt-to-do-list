@@ -4,7 +4,6 @@ import LoginContext from './LoginContext';
 export default function LoginProvider(props) {
   const token = localStorage.getItem("toDoListToken") || null;
   const [editTask, setEditTask] = useState(false);
-  const [reverse, setReverse] = useState(false);
   const [alphabeticalTasks, setAlphabeticalTasks] = useState(false);
   const [tasks, setTasks] = useState([]);
 
@@ -136,8 +135,7 @@ export default function LoginProvider(props) {
     tasks,
     setTasks,
     getAllTasks,
-    reverse,
-    setReverse,
+    alphabeticalTasks,
     setAlphabeticalTasks,
   };
 

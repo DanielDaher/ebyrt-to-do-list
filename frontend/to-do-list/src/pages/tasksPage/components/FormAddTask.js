@@ -7,13 +7,15 @@ export default function FormAddTask(props) {
   const [newTask, setNewTask] = useState('');
   const { addTask } = useContext(loginContext);
 
-  const addNewTask = () => {
+  const addNewTask = (e) => {
+    e.preventDefault();
     const infoTask = {
       task: newTask,
       status: 'Pending',
     };
 
     addTask(infoTask, getTasks);
+    setNewTask('');
   };
 
   return (
@@ -24,7 +26,7 @@ export default function FormAddTask(props) {
         value={newTask}
         onChange={(e) => setNewTask(e.target.value)}
       />
-      <button onClick={() => addNewTask()}>+</button>
+      <button type="submit" onClick={(e) => addNewTask(e)}>+</button>
     </form>
   );
 };

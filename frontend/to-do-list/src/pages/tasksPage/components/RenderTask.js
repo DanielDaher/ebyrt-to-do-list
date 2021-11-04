@@ -6,17 +6,19 @@ export default function RenderTask(props) {
   const [newTask, setNewTask] = useState('');
   const { tasks, renderButtonsOptions, renderSelectAndOptions, editTask, setEditTask, updateTaskById } = useContext(loginContext);
 
- const filteredTasksByStatus = tasks.filter((task) => task.status === taskStatus);
- console.log(filteredTasksByStatus, 'filtado');
-
+  
+  const filteredTasksByStatus = tasks.filter((task) => task.status === taskStatus);
+  
   const saveNewTaskOnState = (value) => {
     setNewTask(value);
   };
-
+  
   const sendNewTaskToUpdate = async (task) => {
     await updateTaskById(task.status, { ...task, task: newTask });
     setEditTask(false);
   };
+  
+  if (tasks === 'this user has no tasks yet!') return null;
 
   if (editTask) return (
     filteredTasksByStatus.map((task) => (
