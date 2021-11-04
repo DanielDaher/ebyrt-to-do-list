@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import loginContext from '../../context/LoginContext';
 
 export default function Register() {
@@ -31,18 +32,43 @@ export default function Register() {
     }
   };
 
+  const renderSubmitButton = () => (
+    <button
+    type="submit"
+    className="register-button"
+    onClick={(e) => createUser(e, { userName, password })}
+    >
+      Register
+    </button>
+  );
+
+  const renderRegisterError = () => (
+    <div>
+      <p>{showNewUser}</p>
+      <button type="reset" className="register-button" onClick={() => setShowNewUser('')} >OK</button>
+    </div>
+  );
+
+  const showRegisterButtonOrError = () => (
+    showNewUser === '' ? renderSubmitButton() : renderRegisterError()
+  );
+
   return (
-    <form className="login-form">
-      <label>
-        Choose your username
-        <input type="text" onChange={(e) => setUserName(e.target.value)} />
-      </label>
-      <label>
-        Choose your password
-        <input type="password" onChange={(e) => setPassword(e.target.value)}/>
-      </label>
-        <button type="submit" onClick={(e) => createUser(e, { userName, password })}>Register</button>
-        {showNewUser === '' ? null : <p>{showNewUser}</p>}
-    </form>
+    <div>
+      <form className="login-form">
+        <Link to="/" className="register-return-button">
+          <button className="form-button">Voltar</button>
+          </Link>
+        <label>
+          Choose your username
+          <input type="text" onChange={(e) => setUserName(e.target.value)} />
+        </label>
+        <label>
+          Choose your password
+          <input type="password" onChange={(e) => setPassword(e.target.value)}/>
+        </label>
+        {showRegisterButtonOrError()}
+      </form>
+    </div>
   );
 };

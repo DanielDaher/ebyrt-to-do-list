@@ -15,6 +15,7 @@ export default function LoginForm(props) {
     return (
       <button
         type="submit"
+        className="form-button"
         onSubmit={(e) => makeLogin(e)} >
         Login
       </button>
@@ -26,6 +27,7 @@ export default function LoginForm(props) {
       <div>
         <p className="login-error-message">{showError}</p>
         <button type="button"
+        className="form-button"
         onClick={() => setShowError(false)}
         >
           OK
@@ -62,7 +64,7 @@ export default function LoginForm(props) {
   return (
     <form className="login-form" onSubmit={(e) => makeLogin(e)}>
       <label>
-        User
+        Username
         <input type="text" onChange={(e) => setUser(e.target.value)} />
       </label>
       <label>
@@ -70,7 +72,7 @@ export default function LoginForm(props) {
         <input type="password" onChange={(e) => setPassword(e.target.value)} />
       </label>
       {showError ? showLoginError() : renderizeSubmitButton()}
-      <Link to="/register" className="login-form-link">
+      <Link to="/register" className="login-form-redirect-link">
         <p>Not registered yet? Click here!</p>
       </Link>
     </form>
