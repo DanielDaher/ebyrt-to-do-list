@@ -3,7 +3,7 @@ const { validateReqBody } = require('./helpers');
 
 const getAll = async (userId) => {
   const tasks = await tasksModel.getAll(userId);
-  if (tasks.length < 1) return { statusCode: 404, responseMessage: 'not found!' };
+  if (tasks.length < 1) return { statusCode: 200, responseMessage: 'this user has no tasks yet!' };
 
   return { statusCode: 200, responseMessage: tasks };
 };
