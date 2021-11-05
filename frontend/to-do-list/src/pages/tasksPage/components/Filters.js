@@ -32,8 +32,8 @@ export default function Filters() {
     <form>
       <select className="order-tasks" onChange={(e) => orderTasks(e.target.value)}>
         <option>Order by</option>
-        <option>Alphabetical order</option>
-        <option>Creation date</option>
+        <option value="Alphabetical order">Alphabetical order</option>
+        <option value="Creation date">Creation date</option>
       </select>
     </form>
   );
