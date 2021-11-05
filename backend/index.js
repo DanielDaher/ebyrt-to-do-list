@@ -18,4 +18,4 @@ app.use('/login', loginRoute);
 app.use('/users', usersRoute);
 
 app.get('/', (req, res) => res.send('Hello World!'));
-app.listen(PORT, () => console.log(`Example app listening on PORT ${PORT}`));
+app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
