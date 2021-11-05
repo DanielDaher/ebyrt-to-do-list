@@ -20,7 +20,6 @@ export default function Tasks(props) {
 
   return (
     <div className="tasks-content">
-      <h1>Tasks</h1>
       <FormAddTask getTasks={getAllTasks} />
       <Filters/>
       <div className="boards-content">

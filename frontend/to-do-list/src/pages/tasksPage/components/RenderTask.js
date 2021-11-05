@@ -47,12 +47,12 @@ export default function RenderTask(props) {
 
   return (
     filteredTasksByStatus.map((task) => (
-      <div key={task._id}>
+      <div key={task._id} className="each-task">
+      {renderSelectAndOptions(task)}
       <p>
         {task.task}
       </p>
       {renderButtonsOptions(task)}
-      {renderSelectAndOptions(task)}
     </div>
     ))
   );

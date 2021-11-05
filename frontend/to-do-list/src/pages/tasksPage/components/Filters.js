@@ -30,7 +30,7 @@ export default function Filters() {
 
   return (
     <form>
-      <select onChange={(e) => orderTasks(e.target.value)}>
+      <select className="order-tasks" onChange={(e) => orderTasks(e.target.value)}>
         <option>Order by</option>
         <option>Alphabetical order</option>
         <option>Creation date</option>

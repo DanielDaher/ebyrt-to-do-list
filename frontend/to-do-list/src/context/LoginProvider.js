@@ -93,8 +93,20 @@ export default function LoginProvider(props) {
   const renderButtonsOptions = (task) => {
     return (
       <div>
-        <button type="button" onClick={() => removeTaskById(task)}>X</button>
-        <button type="button" onClick={() => setEditTask(true)}>Edit</button>
+        <button
+        type="button"
+        className="edit-button"
+        onClick={() => setEditTask(true)}
+        >
+          Edit
+        </button>
+        <button
+        type="button"
+        className="remove-button"
+        onClick={() => removeTaskById(task)}
+        >
+          X
+        </button>
       </div>
     );
   };
