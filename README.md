@@ -33,7 +33,7 @@ Agora sim estamos prontos para instalar o projeto.
 
 5. Abra outro terminal (para não interromper o backend, que deve continuar rodando) e acesse a pasta do projeto novamente.
 
-6. Agora, ao invés de entrar na pasta do backend, vamos para o frontend com `cd frontend` 
+6. Agora, ao invés de entrar na pasta do backend, vamos para o frontend com `cd frontend` e `cd to-do-list`.
 
 7. Instale mais dependências com `npm install`
 
