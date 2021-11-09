@@ -27,9 +27,9 @@ export default function RenderTask(props) {
   
   if (tasks === 'this user has no tasks yet!') return null;
 
-  if (editTask) return (
-    filteredTasksByStatus.map((task) => (
-      <div key={task._id}>
+  const renderInputEditTask = (task) => {
+    return (
+      <div key={task._id} className="each-task">
         <input
           type="text"
           placeholder={`${task.task}`}
@@ -42,18 +42,22 @@ export default function RenderTask(props) {
             OK
         </button>
       </div>
-    ))
-  );
+    );
+  };
+
+  const renderTaskDiv = (task) => {
+    return (
+      <div key={task._id} className="each-task">
+        {renderSelectAndOptions(task)}
+        <p>
+          {task.task}
+        </p>
+        {renderButtonsOptions(task)}
+      </div>
+    );
+  };
 
   return (
-    filteredTasksByStatus.map((task) => (
-      <div key={task._id} className="each-task">
-      {renderSelectAndOptions(task)}
-      <p>
-        {task.task}
-      </p>
-      {renderButtonsOptions(task)}
-    </div>
-    ))
+    filteredTasksByStatus.map((task) => editTask === task._id ? renderInputEditTask(task) : renderTaskDiv(task))
   );
 };
