@@ -57,7 +57,7 @@ export default function Register() {
     <div>
       <form className="login-form">
         <Link to="/" className="register-return-button">
-          <button className="form-button">Voltar</button>
+          <button className="form-button">Back</button>
           </Link>
         <label>
           Choose your username

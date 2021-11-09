@@ -26,3 +26,23 @@
   flex-direction: column;
   justify-content: center;
 }
+
+@media screen and (max-width: 812px) {
+  .home-content {
+    flex-direction: column;
+  }
+
+  .home-title {
+    margin-top: 130px;
+    margin-left: 30px;
+    font-size: 50px;
+  }
+  
+  .home-title, .home-subtitle {
+    align-self: flex-start;
+  }
+
+  .home-subtitle {
+    margin-right: 50px;
+  }
+}

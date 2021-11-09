@@ -10,3 +10,10 @@ body {
   min-height: 100vh;
   text-align: center;
 }
+
+@media screen and (max-width: 800px) {
+ body {
+   background-position: center;
+   background-repeat: repeat;
+ } 
+}
