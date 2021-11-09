@@ -103,3 +103,36 @@
   transform: scale(1.05);
   transition: 0.5s;
 }
+
+@media screen and (max-width: 812px) {
+  .tasks-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+  }
+
+  .logout-button {
+    margin-top: 50px;
+  }
+
+  .boards-content {
+    margin-top: 280px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .first-board, .second-board, .third-board {
+    width: 80vw;
+    min-height: 270px;
+    overflow: scroll;
+  }
+
+  .each-task {
+    display: flex;
+    flex-wrap: wrap;
+    width: 270px;
+    margin-bottom: 10px;
+  }
+}
