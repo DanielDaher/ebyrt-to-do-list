@@ -65,6 +65,16 @@
   background-color: rgba(84, 84, 84, 0.9);
 }
 
+.each-task input {
+  min-width: 90%;
+  height: 50px;
+  text-align: center;
+}
+
+.each-task input::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
 .remove-button {
   color: silver;
   font-size: 15px;

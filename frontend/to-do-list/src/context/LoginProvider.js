@@ -96,7 +96,7 @@ export default function LoginProvider(props) {
         <button
         type="button"
         className="edit-button"
-        onClick={() => setEditTask(true)}
+        onClick={() => setEditTask(task._id)}
         >
           Edit
         </button>
