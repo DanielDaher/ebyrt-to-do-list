@@ -18,8 +18,19 @@ export default function Tasks(props) {
     getTasksFromAPI();
   }, []);
 
+  const deleteTokenFromLocalStorageAndRedirect = () => {
+    window.location.href = window.origin;
+    localStorage.removeItem('toDoListToken');
+  };
+
   return (
     <div className="tasks-content">
+      <button
+        className="logout-button"
+        onClick={() => deleteTokenFromLocalStorageAndRedirect()}
+        >
+          Logout
+      </button>
       <FormAddTask getTasks={getAllTasks} />
       <Filters/>
       <div className="boards-content">
