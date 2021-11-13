@@ -5,7 +5,10 @@ Boas vindas ao To Do List da empresa Ebyrt, onde você pode adicionar tarefas e 
 
 O objetivo do projeto é facilitar a organização dos afazeres de todas as pessoas colaboradoras da empresa Ebyrt.
 
-## Como rodar a aplicação:
+## Para acessar o link da aplicação:
+[ebyrt-to-do-list] (https://ebyrt-to-do-list-frontend.herokuapp.com/)
+
+## Como rodar a aplicação no computador:
 
 #### Seu computador precisa de Git (para versionamento do código), Node.js & npm (para executar a aplicação) e MongoDB (que será nosso banco de dados). Clique nos links, caso ainda não tenha instalado algum desses:
 
