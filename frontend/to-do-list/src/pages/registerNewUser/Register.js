@@ -1,17 +1,18 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import loginContext from '../../context/LoginContext';
+require('dotenv').config();
 
 export default function Register() {
   const { token } = useContext(loginContext);
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [showNewUser, setShowNewUser] = useState('');
-
+  
   const createUser = async (event, { userName, password }) => {
     event.preventDefault();
     try {
-      const url = 'http://localhost:3000/users/';
+      const url = `${process.env.REACT_APP_API_URL}/users` /* || 'http://localhost:3000/users/' */;
     
       const registerUser = await fetch(url, {
         method: "POST",

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../../css/LoginForm.css';
+require('dotenv').config();
 
 export default function LoginForm(props) {
   const [user, setUser] = useState('');
@@ -44,7 +45,8 @@ export default function LoginForm(props) {
 
   const makeLogin = async (e) => {
     e.preventDefault();
-    const url = 'http://localhost:3000/login';
+    const url = `${process.env.REACT_APP_API_URL}/login` /* || 'http://localhost:3000/login' */;
+    console.log(url);
 
     const requisition = await fetch(url, {
       method: "POST",

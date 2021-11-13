@@ -6,6 +6,8 @@ export default function RenderTask(props) {
   const [newTask, setNewTask] = useState('');
   const { tasks, alphabeticalTasks, sortTasksByName, tasksByDate, sortTasksByDate, renderButtonsOptions, renderSelectAndOptions, editTask, setEditTask, updateTaskById } = useContext(loginContext);
 
+  if (tasks === 'this user has no tasks yet!') return null;
+
   let filteredTasksByStatus = tasks.filter((task) => task.status === taskStatus);
 
   if (alphabeticalTasks) {
@@ -24,8 +26,6 @@ export default function RenderTask(props) {
     await updateTaskById(task.status, { ...task, task: newTask });
     setEditTask(false);
   };
-  
-  if (tasks === 'this user has no tasks yet!') return null;
 
   const renderInputEditTask = (task) => {
     return (
