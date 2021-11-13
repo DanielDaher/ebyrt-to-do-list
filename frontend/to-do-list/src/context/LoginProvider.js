@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import LoginContext from './LoginContext';
+require('dotenv').config();
 
 export default function LoginProvider(props) {
   const token = localStorage.getItem("toDoListToken") || null;
@@ -11,7 +12,7 @@ export default function LoginProvider(props) {
   const getAllTasks = async () => {
     console.log('getAllTasks');   
     try {
-      const url = 'http://localhost:3000/tasks';
+      const url = `${process.env.REACT_APP_API_URL}/tasks`/*  || 'http://localhost:3000/tasks' */;
     
       const requisition = await fetch(url, {
         method: "GET",
@@ -30,7 +31,7 @@ export default function LoginProvider(props) {
   const updateTaskById = async (status, { task, _id }) => {
     if (status === 'Change status') return null;
     try {
-      const url = `http://localhost:3000/tasks/${_id}`;
+      const url = `${process.env.REACT_APP_API_URL}/tasks/${_id}`/*  || `http://localhost:3000/tasks/${_id}` */;
     
       await fetch(url, {
         method: "PUT",
@@ -52,7 +53,7 @@ export default function LoginProvider(props) {
 
   const addTask = async ({ task, status }, getTasks) => {
     try {
-      const url = 'http://localhost:3000/tasks/';
+      const url = `${process.env.REACT_APP_API_URL}/tasks`/*  || 'http://localhost:3000/tasks/' */;
     
       await fetch(url, {
         method: "POST",
@@ -74,7 +75,7 @@ export default function LoginProvider(props) {
 
   const removeTaskById = async ({ _id }) => {
     try {
-      const url = `http://localhost:3000/tasks/${_id}`;
+      const url = `${process.env.REACT_APP_API_URL}/tasks/${_id}`/*  || `http://localhost:3000/tasks/${_id}` */;
     
       await fetch(url, {
         method: "DELETE",

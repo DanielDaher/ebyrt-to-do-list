@@ -8,7 +8,7 @@ const create = async (req, res) => {
     res.status(insert.statusCode).json(insert.responseMessage);
   } catch (error) {
     console.error(error);
-    res.status(400).json({ message: 'error, try again latter' });
+    res.status(400).json('error, try again latter');
   }
 };
 
